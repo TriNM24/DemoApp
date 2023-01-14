@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_background">#FEFCFD</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="stroke_color">#75777a</color>
+
+    <color name="dialog_button_color">#40627b</color>
+    <color name="dialog_background_color">#e9ebef</color>
+
+    <color name="item_background_color">#f5f4f7</color>
+    <color name="item_line_color">#e1e2e6</color>
+</resources>
