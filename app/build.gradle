@@ -37,6 +37,13 @@ android {
         }
     }
 
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def newApkName = "baseApp_" + new Date().format('yyyyMMdd_hhmm_') + versionName + "_" + variant.buildType.name + ".apk"
+            outputFileName = new File(newApkName)
+        }
+    }
+
     signingConfigs {
         config {
             keyAlias keystoreProperties['keyAlias']
