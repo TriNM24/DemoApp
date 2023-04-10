@@ -23,8 +23,8 @@ android {
         applicationId "android.com.demo"
         minSdk 21
         targetSdk 33
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.2"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         javaCompileOptions {
@@ -63,6 +63,30 @@ android {
             signingConfig signingConfigs.config
         }
     }
+
+    flavorDimensions "version"
+    productFlavors {
+        demo {
+            dimension "version"
+            firebaseAppDistribution {
+                /*releaseNotes="Release notes for demo version"
+                testers="demo@testers.com"*/
+                artifactType="APK"
+                artifactPath = "$rootDir/build/outputs/apk/demo/debug/Test.apk"
+                releaseNotesFile="$rootDir/distribute/releasenotes.txt"
+                testers="tri.nguyen833@gmail.com"
+                serviceCredentialsFile="$rootDir/service_key_app_distribute.json"
+            }
+        }
+        full {
+            dimension "version"
+            firebaseAppDistribution {
+                releaseNotes="Release notes for full version"
+                testers="full@testers.com"
+            }
+        }
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -112,7 +136,7 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 
     //read barcode
-    //implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
     //room
     def room_version = "2.5.0"
