@@ -42,4 +42,8 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
         }
     }
+
+    override fun onClickCrashButton() {
+        val temp = 1/0
+    }
 }

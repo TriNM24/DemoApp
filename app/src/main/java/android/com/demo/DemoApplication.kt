@@ -1,6 +1,9 @@
 package android.com.demo
 
 import android.app.Application
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.crashlytics.ktx.setCustomKeys
+import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 import timber.log.Timber.Forest.plant
@@ -13,6 +16,16 @@ class BaseApplication : Application() {
         super.onCreate()
         if (BuildConfig.DEBUG) {
             plant(MyDebugTree())
+        }
+
+        val crashlytics = Firebase.crashlytics
+        //disable crashlytics for debug
+        crashlytics.setCrashlyticsCollectionEnabled(BuildConfig.DEBUG)
+        //add custom key for more information
+        crashlytics.setCustomKeys {
+            key("environment", BuildConfig.BUILD_TYPE)
+            key("version code", BuildConfig.VERSION_CODE)
+            key("version name", BuildConfig.VERSION_NAME)
         }
     }
 }

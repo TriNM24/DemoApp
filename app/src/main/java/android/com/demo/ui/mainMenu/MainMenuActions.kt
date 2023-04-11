@@ -4,4 +4,5 @@ interface MainMenuActions {
     fun onClickCallButton()
     fun onClickBuyButton()
     fun onClickSellButton()
+    fun onClickCrashButton()
 }

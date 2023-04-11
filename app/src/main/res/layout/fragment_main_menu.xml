@@ -51,8 +51,19 @@
             android:layout_marginTop="@dimen/margin_10dp"
             android:onClick="@{() -> actions.onClickSellButton()}"
             android:text="@string/menu_sell"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnCrash"
             app:layout_constraintTop_toBottomOf="@+id/btnMenuBuy" />
+
+        <Button
+            android:id="@+id/btnCrash"
+            style="@style/CommonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:onClick="@{() -> actions.onClickCrashButton()}"
+            android:text="@string/menu_crash"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnMenuSell" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
