@@ -30,6 +30,10 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        /*rename bundle file(*.aab)*/
+        setProperty("archivesBaseName", "baseApp_" + new Date().format('ddMMyyyy_hhmm_') + versionName)
+
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments += [
@@ -40,6 +44,7 @@ android {
         }
     }
 
+    /*Rename for apk file*/
     applicationVariants.all { variant ->
         variant.outputs.all { output ->
             def newApkName = "baseApp_" + new Date().format('yyyyMMdd_hhmm_') + versionName + "_" + variant.buildType.name + ".apk"
