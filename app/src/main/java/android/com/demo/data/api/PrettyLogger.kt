@@ -4,6 +4,8 @@ import android.util.Log
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonParser
 import okhttp3.logging.HttpLoggingInterceptor
+import java.net.URLDecoder
+import java.nio.charset.StandardCharsets
 
 class PrettyLogger : HttpLoggingInterceptor.Logger {
     private val mGson = GsonBuilder().setPrettyPrinting().create()
@@ -21,7 +23,10 @@ class PrettyLogger : HttpLoggingInterceptor.Logger {
                 Log.e(TAG_API, message, e)
             }
         } else {
-            Log.i(TAG_API, message)
+            //convert URL-encoded text to Unicode character
+            //%C6%A1 to ơ
+            val decodedText = URLDecoder.decode(message, StandardCharsets.UTF_8.toString())
+            Log.i(TAG_API, decodedText)
         }
     }
 }

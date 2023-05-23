@@ -4,6 +4,7 @@ import android.com.demo.R
 import android.com.demo.databinding.ActivityMainBinding
 import android.com.demo.ui.base.BaseActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import com.google.firebase.analytics.FirebaseAnalytics
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,6 +37,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
+
+        val appInstanceID = mFirebaseAnalytics.appInstanceId.addOnCompleteListener {
+            Log.d("testt","appInstanceID: ${it.result}")
+        }
+
     }
 
     override fun onPause() {

@@ -13,6 +13,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStoreOwner
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.analytics
+import com.google.firebase.ktx.Firebase
 import java.lang.reflect.ParameterizedType
 
 
@@ -20,6 +23,8 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
     lateinit var viewModel: VM
     var binding: BD? = null
     lateinit var mLoadingDialog: Dialog
+
+    lateinit var firebaseAnalytics: FirebaseAnalytics
 
     abstract val resourceLayoutId: Int
     abstract fun onInitView(root: View?)
@@ -34,6 +39,8 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
         binding = DataBindingUtil.bind(root)
         initViewModel()
         onInitView(root)
+        // Obtain the FirebaseAnalytics instance.
+        firebaseAnalytics = Firebase.analytics
         return root
     }
 

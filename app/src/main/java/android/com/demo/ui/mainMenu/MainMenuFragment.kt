@@ -6,6 +6,8 @@ import android.com.demo.ui.base.BaseFragment
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,24 +28,37 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     }
 
     override fun onClickCallButton() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+            param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCallButton")
+        }
+
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_callListFragment)
         }
     }
 
     override fun onClickBuyButton() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+            param(FirebaseAnalytics.Param.ITEM_NAME, "onClickBuyButton")
+        }
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_buyListFragment)
         }
     }
 
     override fun onClickSellButton() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+            param(FirebaseAnalytics.Param.ITEM_NAME, "onClickSellButton")
+        }
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
         }
     }
 
     override fun onClickCrashButton() {
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+            param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCrashButton")
+        }
         val temp = 1/0
     }
 }

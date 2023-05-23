@@ -15,14 +15,14 @@ abstract class BaseActivity<BD : ViewDataBinding>: AppCompatActivity() {
     var binding: BD? = null
 
 
-    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    lateinit var mFirebaseAnalytics: FirebaseAnalytics
 
     abstract fun onInitView(root: View?)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Obtain the FirebaseAnalytics instance.
-        firebaseAnalytics = Firebase.analytics
+        mFirebaseAnalytics = Firebase.analytics
         //Firebase Analytics will auto log screen view event
 
         binding = DataBindingUtil.setContentView(this, resourceLayoutId)
