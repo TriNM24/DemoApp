@@ -18,6 +18,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
 
     lateinit var mNavController: NavController
 
+    private val USER_CUSTOM_VIEW = "user_custom_view"
     override fun onInitView(root: View?) {
         mNavController = findNavController()
     }
@@ -31,6 +32,10 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCallButton")
         }
+        //send custom log
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
+            param("button", "onClickCallButton")
+        }
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_callListFragment)
@@ -41,6 +46,12 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickBuyButton")
         }
+
+        //send custom log
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
+            param("button", "onClickBuyButton")
+        }
+
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_buyListFragment)
         }
@@ -50,6 +61,10 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickSellButton")
         }
+        //send custom log
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
+            param("button", "onClickSellButton")
+        }
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
         }
@@ -58,6 +73,10 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun onClickCrashButton() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCrashButton")
+        }
+        //send custom log
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
+            param("button", "onClickCrashButton")
         }
         val temp = 1/0
     }
