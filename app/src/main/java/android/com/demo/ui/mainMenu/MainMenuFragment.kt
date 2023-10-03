@@ -36,6 +36,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
             param("user_custom_view_name", "onClickCallButton")
+            param("user_custom_view_id", "onClickCallButtonID")
         }
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
@@ -52,6 +53,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
             param("user_custom_view_name", "onClickBuyButton")
+            param("user_custom_view_id", "onClickBuyButtonID")
         }
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
@@ -67,6 +69,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
             param("user_custom_view_name", "onClickSellButton")
+            param("user_custom_view_id", "onClickSellButtonID")
         }
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
@@ -81,6 +84,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
             param("user_custom_view_name", "onClickCrashButton")
+            param("user_custom_view_id", "onClickCrashButtonID")
         }
         val temp = 1/0
     }

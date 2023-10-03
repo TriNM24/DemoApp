@@ -6,9 +6,12 @@ import android.com.demo.data.api.responeFactory.CustomCallAdapterFactory
 import android.com.demo.utils.Constants
 import android.com.demo.utils.Constants.API_KEY
 import android.com.demo.utils.Constants.API_KEY_VALUE
+import android.content.Context
+import com.chuckerteam.chucker.api.ChuckerInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -30,11 +33,13 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(prettyLogInterceptor: HttpLoggingInterceptor): OkHttpClient{
+    fun provideOkHttpClient(@ApplicationContext context: Context,
+                            prettyLogInterceptor: HttpLoggingInterceptor): OkHttpClient{
 
         val builderOkHttpClient = OkHttpClient.Builder()
         //add interceptor for pretty log
         builderOkHttpClient.addInterceptor(prettyLogInterceptor)
+        builderOkHttpClient.addInterceptor(ChuckerInterceptor(context))
         builderOkHttpClient.networkInterceptors().add(Interceptor { chain ->
             val build = chain.request().newBuilder().addHeader(
                 API_KEY,
