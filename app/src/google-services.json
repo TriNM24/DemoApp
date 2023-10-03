@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "717882213993",
+    "project_id": "basedemo-43a2b",
+    "storage_bucket": "basedemo-43a2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:717882213993:android:9e55e780da384ded6444f8",
+        "android_client_info": {
+          "package_name": "android.com.demo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqnp5jhA0UI4i6Qr9RDLIOmUmqDv-K5SI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

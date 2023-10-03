@@ -31,10 +31,11 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun onClickCallButton() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCallButton")
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickCallButton screen")
         }
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("button", "onClickCallButton")
+            param("user_custom_view_name", "onClickCallButton")
         }
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
@@ -45,11 +46,12 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun onClickBuyButton() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickBuyButton")
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickBuyButton screen")
         }
 
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("button", "onClickBuyButton")
+            param("user_custom_view_name", "onClickBuyButton")
         }
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
@@ -60,10 +62,11 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun onClickSellButton() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickSellButton")
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickSellButton screen")
         }
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("button", "onClickSellButton")
+            param("user_custom_view_name", "onClickSellButton")
         }
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
@@ -73,10 +76,11 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun onClickCrashButton() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCrashButton")
+            param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickCrashButton screen")
         }
         //send custom log
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("button", "onClickCrashButton")
+            param("user_custom_view_name", "onClickCrashButton")
         }
         val temp = 1/0
     }
