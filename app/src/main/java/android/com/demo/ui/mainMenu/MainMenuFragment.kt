@@ -7,6 +7,7 @@ import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.ktx.ParametersBuilder
 import com.google.firebase.analytics.ktx.logEvent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,10 +35,11 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickCallButton screen")
         }
         //send custom log
-        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("user_custom_view_name", "onClickCallButton")
-            param("user_custom_view_id", "onClickCallButtonID")
-        }
+        val paramBuilder = ParametersBuilder()
+        paramBuilder.param("user_custom_view_name", "onClickCallButton")
+        paramBuilder.param("user_custom_view_id", "onClickCallButtonID")
+
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_callListFragment)
@@ -51,10 +53,10 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         }
 
         //send custom log
-        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("user_custom_view_name", "onClickBuyButton")
-            param("user_custom_view_id", "onClickBuyButtonID")
-        }
+        val paramBuilder = ParametersBuilder()
+        paramBuilder.param("user_custom_view_name", "onClickBuyButton")
+        paramBuilder.param("user_custom_view_id", "onClickBuyButtonID")
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
 
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_buyListFragment)
@@ -67,10 +69,11 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickSellButton screen")
         }
         //send custom log
-        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("user_custom_view_name", "onClickSellButton")
-            param("user_custom_view_id", "onClickSellButtonID")
-        }
+        val paramBuilder = ParametersBuilder()
+        paramBuilder.param("user_custom_view_name", "onClickSellButton")
+        paramBuilder.param("user_custom_view_id", "onClickSellButtonID")
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
+
         if(mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
         }
@@ -82,10 +85,10 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickCrashButton screen")
         }
         //send custom log
-        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW){
-            param("user_custom_view_name", "onClickCrashButton")
-            param("user_custom_view_id", "onClickCrashButtonID")
-        }
+        val paramBuilder = ParametersBuilder()
+        paramBuilder.param("user_custom_view_name", "onClickCrashButton")
+        paramBuilder.param("user_custom_view_id", "onClickCrashButtonID")
+        firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
         val temp = 1/0
     }
 }
