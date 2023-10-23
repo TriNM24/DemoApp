@@ -1,6 +1,7 @@
 package android.com.demo
 
 import android.app.Application
+import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.crashlytics.ktx.setCustomKeys
 import com.google.firebase.ktx.Firebase
@@ -27,6 +28,7 @@ class BaseApplication : Application() {
             key("version code", BuildConfig.VERSION_CODE)
             key("version name", BuildConfig.VERSION_NAME)
         }
+        Firebase.analytics.setUserId("userid_test")
     }
 }
 
