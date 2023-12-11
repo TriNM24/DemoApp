@@ -62,8 +62,19 @@
             android:layout_marginTop="@dimen/margin_10dp"
             android:onClick="@{() -> actions.onClickCrashButton()}"
             android:text="@string/menu_crash"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnSendPinPointLog"
             app:layout_constraintTop_toBottomOf="@+id/btnMenuSell" />
+
+        <Button
+            android:id="@+id/btnSendPinPointLog"
+            style="@style/CommonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:onClick="@{() -> actions.onClickSendLogButton()}"
+            android:text="@string/menu_send_log"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCrash" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

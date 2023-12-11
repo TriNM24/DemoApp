@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.amplifyframework.analytics.AnalyticsEvent
+import com.amplifyframework.core.Amplify
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.ParametersBuilder
 import com.google.firebase.analytics.ktx.logEvent
@@ -168,6 +170,18 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
                 Log.d("testt",it.result.toString())
             }
         }
+    }
+
+    override fun onClickSendLogButton() {
+        val event = AnalyticsEvent.builder()
+            .name("PasswordReset")
+            .addProperty("Channel", "SMS")
+            .addProperty("Successful", true)
+            .addProperty("ProcessDuration", 792)
+            .addProperty("UserAge", 120.3)
+            .build()
+
+        Amplify.Analytics.recordEvent(event)
     }
 
     private fun readCert(){

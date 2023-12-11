@@ -1,6 +1,11 @@
 package android.com.demo
 
 import android.app.Application
+import android.util.Log
+import com.amplifyframework.AmplifyException
+import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin
+import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
+import com.amplifyframework.core.Amplify
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.crashlytics.ktx.setCustomKeys
@@ -29,6 +34,17 @@ class BaseApplication : Application() {
             key("version name", BuildConfig.VERSION_NAME)
         }
         Firebase.analytics.setUserId("userid_test")
+
+
+        try {
+            // Add these lines to add the AWSCognitoAuthPlugin and AWSPinpointAnalyticsPlugin plugins
+            Amplify.addPlugin(AWSCognitoAuthPlugin())
+            Amplify.addPlugin(AWSPinpointAnalyticsPlugin())
+            Amplify.configure(applicationContext)
+            Timber.tag("MyAmplifyApp").d("Initialized Amplify")
+        } catch (error: AmplifyException) {
+            Timber.tag("MyAmplifyApp").d(error, "Could not initialize Amplify")
+        }
     }
 }
 

@@ -6,6 +6,7 @@
     <string name="menu_buy">Buy List</string>
     <string name="menu_sell">Sell List</string>
     <string name="menu_crash">Crash demo</string>
+    <string name="menu_send_log">Send record to AWS PinPoint</string>
 
     <string name="dialog_confirm_button">Confirm</string>
     <string name="dialog_positive_button">Yes</string>
