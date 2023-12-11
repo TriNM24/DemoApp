@@ -176,6 +176,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         val event = AnalyticsEvent.builder()
             .name("PasswordReset")
             .addProperty("Channel", "SMS")
+            .addProperty("Function", "onClickSendLogButton")
             .addProperty("Successful", true)
             .addProperty("ProcessDuration", 792)
             .addProperty("UserAge", 120.3)
