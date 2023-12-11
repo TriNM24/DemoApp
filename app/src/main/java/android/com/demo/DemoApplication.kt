@@ -3,7 +3,10 @@ package android.com.demo
 import android.app.Application
 import android.util.Log
 import com.amplifyframework.AmplifyException
+import com.amplifyframework.analytics.AnalyticsProperties
+import com.amplifyframework.analytics.UserProfile
 import com.amplifyframework.analytics.pinpoint.AWSPinpointAnalyticsPlugin
+import com.amplifyframework.analytics.pinpoint.models.AWSPinpointUserProfile
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin
 import com.amplifyframework.core.Amplify
 import com.google.firebase.analytics.ktx.analytics
@@ -41,6 +44,35 @@ class BaseApplication : Application() {
             Amplify.addPlugin(AWSCognitoAuthPlugin())
             Amplify.addPlugin(AWSPinpointAnalyticsPlugin())
             Amplify.configure(applicationContext)
+
+            //testt
+            val location = UserProfile.Location.builder()
+                .latitude(47.606209)
+                .longitude(-122.332069)
+                .postalCode("98122")
+                .city("Seattle")
+                .region("WA")
+                .country("USA")
+                .build()
+
+            val customProperties = AnalyticsProperties.builder()
+                .add("property1", "Property value")
+                .build()
+
+            val userAttributes = AnalyticsProperties.builder()
+                .add("someUserAttribute", "User attribute value")
+                .build()
+
+            val profile = AWSPinpointUserProfile.builder()
+                .name("test-user")
+                .email("user@test.com")
+                .plan("test-plan")
+                .location(location)
+                .customProperties(customProperties)
+                .userAttributes(userAttributes)
+                .build()
+
+            Amplify.Analytics.identifyUser("test_userid", profile)
             Timber.tag("MyAmplifyApp").d("Initialized Amplify")
         } catch (error: AmplifyException) {
             Timber.tag("MyAmplifyApp").d(error, "Could not initialize Amplify")
