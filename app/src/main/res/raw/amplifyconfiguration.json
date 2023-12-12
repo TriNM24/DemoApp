@@ -30,6 +30,13 @@
                         }
                     }
                 },
+                "CognitoUserPool": {
+                    "Default": {
+                        "PoolId": "ap-southeast-1_jfdBZ4gwA",
+                        "AppClientId": "2v6psgirjpb974khul4uavt07o",
+                        "Region": "ap-southeast-1"
+                    }
+                },
                 "Auth": {
                     "Default": {
                         "authenticationFlowType": "USER_SRP_AUTH",

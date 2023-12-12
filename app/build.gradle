@@ -154,6 +154,8 @@ dependencies {
 
     implementation 'com.amplifyframework:aws-analytics-pinpoint:2.14.5'
     implementation 'com.amplifyframework:aws-auth-cognito:2.14.5'
+
+    implementation 'com.amplifyframework:aws-auth-cognito:2.14.6'
 }
 
 // Allow references to generated code

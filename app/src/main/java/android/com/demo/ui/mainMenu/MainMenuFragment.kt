@@ -1,6 +1,7 @@
 package android.com.demo.ui.mainMenu
 
 import android.com.demo.R
+import android.com.demo.data.api.Status
 import android.com.demo.databinding.FragmentMainMenuBinding
 import android.com.demo.ui.base.BaseFragment
 import android.os.Bundle
@@ -10,6 +11,11 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.amplifyframework.analytics.AnalyticsEvent
+import com.amplifyframework.auth.AuthException
+import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
+import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
+import com.amplifyframework.auth.result.AuthSessionResult
+import com.amplifyframework.auth.result.AuthSignInResult
 import com.amplifyframework.core.Amplify
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.ParametersBuilder
@@ -85,6 +91,24 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     override fun subscribeUi(viewModel: MainMenuViewModel) {
         binding?.viewModel = viewModel
         binding?.actions = this
+
+        viewModel.mProcessData.observe(this) { result ->
+            when (result.status) {
+                Status.SUCCESS -> {
+                    mLoadingDialog.dismiss()
+                    result?.data?.let {
+                        Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                    }
+                }
+                Status.ERROR -> {
+                    mLoadingDialog.dismiss()
+                    Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
+                }
+                Status.LOADING -> {
+                    mLoadingDialog.show()
+                }
+            }
+        }
     }
 
     override fun onClickCallButton() {
@@ -173,6 +197,41 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     }
 
     override fun onClickSendLogButton() {
+
+        /*Amplify.Auth.fetchAuthSession(
+            {
+                val session = it as AWSCognitoAuthSession
+                when (session.identityIdResult.type) {
+                    AuthSessionResult.Type.SUCCESS ->
+                        Log.i("AuthQuickStart", "IdentityId = ${session.identityIdResult.value}")
+                    AuthSessionResult.Type.FAILURE ->
+                        Log.w("AuthQuickStart", "IdentityId not found", session.identityIdResult.error)
+                }
+            },
+            { Log.e("AuthQuickStart", "Failed to fetch session", it) }
+        )*/
+
+        /*val options = AuthSignUpOptions.builder()
+            .userAttribute(AuthUserAttributeKey.email(), "tri.nguyen833@gmail.com")
+            .build()
+        Amplify.Auth.signUp("tri.nguyen833", "Abcd1234!", options,
+            { Log.i("AuthQuickStart", "Sign up succeeded: $it") },
+            { Log.e ("AuthQuickStart", "Sign up failed", it) }
+        )*/
+
+        /*Amplify.Auth.confirmSignUp(
+            "tri.nguyen833", "the code you received via email",
+            { result ->
+                if (result.isSignUpComplete) {
+                    Log.i("AuthQuickstart", "Confirm signUp succeeded")
+                } else {
+                    Log.i("AuthQuickstart","Confirm sign up not complete")
+                }
+            },
+            { Log.e("AuthQuickstart", "Failed to confirm sign up", it) }
+        )*/
+
+
         val event = AnalyticsEvent.builder()
             .name("PasswordReset")
             .addProperty("Channel", "SMS")
@@ -183,6 +242,14 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
             .build()
 
         Amplify.Analytics.recordEvent(event)
+    }
+
+    override fun onClickLogin() {
+        viewModel.loginCognito("tri.nguyen833","Abcd1234!")
+    }
+
+    override fun onClickLogout() {
+        viewModel.logoutCognito()
     }
 
     private fun readCert(){

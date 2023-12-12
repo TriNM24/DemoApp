@@ -6,4 +6,7 @@ interface MainMenuActions {
     fun onClickSellButton()
     fun onClickCrashButton()
     fun onClickSendLogButton()
+
+    fun onClickLogin()
+    fun onClickLogout()
 }

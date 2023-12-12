@@ -46,7 +46,7 @@ class BaseApplication : Application() {
             Amplify.configure(applicationContext)
 
             //testt
-            val location = UserProfile.Location.builder()
+            /*val location = UserProfile.Location.builder()
                 .latitude(47.606209)
                 .longitude(-122.332069)
                 .postalCode("98122")
@@ -72,7 +72,7 @@ class BaseApplication : Application() {
                 .userAttributes(userAttributes)
                 .build()
 
-            Amplify.Analytics.identifyUser("test_userid", profile)
+            Amplify.Analytics.identifyUser("test_userid", profile)*/
             Timber.tag("MyAmplifyApp").d("Initialized Amplify")
         } catch (error: AmplifyException) {
             Timber.tag("MyAmplifyApp").d(error, "Could not initialize Amplify")

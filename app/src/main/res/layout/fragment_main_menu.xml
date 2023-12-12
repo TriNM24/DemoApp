@@ -27,9 +27,9 @@
             android:layout_height="wrap_content"
             android:onClick="@{() -> actions.onClickCallButton()}"
             android:text="@string/menu_call"
-            app:layout_constraintVertical_bias="0.4"
             app:layout_constraintBottom_toTopOf="@+id/btnMenuBuy"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.4"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <Button
@@ -73,8 +73,30 @@
             android:layout_marginTop="@dimen/margin_10dp"
             android:onClick="@{() -> actions.onClickSendLogButton()}"
             android:text="@string/menu_send_log"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogin"
             app:layout_constraintTop_toBottomOf="@+id/btnCrash" />
+
+        <Button
+            android:id="@+id/btnLogin"
+            style="@style/CommonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:onClick="@{() -> actions.onClickLogin()}"
+            android:text="@string/menu_login"
+            app:layout_constraintBottom_toTopOf="@+id/btnLogout"
+            app:layout_constraintTop_toBottomOf="@+id/btnSendPinPointLog" />
+
+        <Button
+            android:id="@+id/btnLogout"
+            style="@style/CommonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:onClick="@{() -> actions.onClickLogout()}"
+            android:text="@string/menu_logout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
