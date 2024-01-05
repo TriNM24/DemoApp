@@ -16,4 +16,6 @@ class LoginViewModel @Inject constructor(
     init {
         Timber.d("Create LoginViewModel")
     }
+
+
 }

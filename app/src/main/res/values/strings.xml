@@ -22,4 +22,12 @@
 
     <string name="message_do_not_have_data">Do not have data</string>
     <string name="login_button">Login</string>
+    <string name="register_biometric">Register Login Biometric</string>
+    <string name="secret_key_name">biometric_sample_encryption_key</string>
+
+    <string name="prompt_info_title">Sample App Authentication</string>
+    <string name="prompt_info_subtitle">Please login to get access</string>
+    <string name="prompt_info_description">Sample App is using Android biometric authentication</string>
+    <string name="prompt_info_use_app_password">Use app password</string>
+
 </resources>
