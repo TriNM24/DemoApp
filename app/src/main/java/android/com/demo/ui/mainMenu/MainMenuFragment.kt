@@ -11,11 +11,6 @@ import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.amplifyframework.analytics.AnalyticsEvent
-import com.amplifyframework.auth.AuthException
-import com.amplifyframework.auth.cognito.AWSCognitoAuthSession
-import com.amplifyframework.auth.cognito.result.AWSCognitoAuthSignOutResult
-import com.amplifyframework.auth.result.AuthSessionResult
-import com.amplifyframework.auth.result.AuthSignInResult
 import com.amplifyframework.core.Amplify
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.ktx.ParametersBuilder
@@ -73,7 +68,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
 
                     val userName = remoteConfig.getString("user_name")
                     val pass = remoteConfig.getString("pass")
-                    Log.d("testt","user: $userName, pass:$pass")
+                    Log.d("testt", "user: $userName, pass:$pass")
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -100,10 +95,12 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
                         Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                     }
                 }
+
                 Status.ERROR -> {
                     mLoadingDialog.dismiss()
                     Toast.makeText(requireContext(), result.message, Toast.LENGTH_SHORT).show()
                 }
+
                 Status.LOADING -> {
                     mLoadingDialog.show()
                 }
@@ -112,7 +109,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     }
 
     override fun onClickCallButton() {
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickCallButton")
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickCallButton screen")
         }
@@ -123,13 +120,13 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
 
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
 
-        if(mNavController.currentDestination?.id == R.id.nav_home) {
+        if (mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_callListFragment)
         }
     }
 
     override fun onClickBuyButton() {
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickBuyButton")
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickBuyButton screen")
         }
@@ -140,13 +137,13 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         paramBuilder.param("user_custom_view_id", "onClickBuyButtonID")
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
 
-        if(mNavController.currentDestination?.id == R.id.nav_home) {
+        if (mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_buyListFragment)
         }
     }
 
     override fun onClickSellButton() {
-        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM){
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM) {
             param(FirebaseAnalytics.Param.ITEM_NAME, "onClickSellButton")
             param(FirebaseAnalytics.Param.SCREEN_NAME, "onClickSellButton screen")
         }
@@ -156,7 +153,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         paramBuilder.param("user_custom_view_id", "onClickSellButtonID")
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
 
-        if(mNavController.currentDestination?.id == R.id.nav_home) {
+        if (mNavController.currentDestination?.id == R.id.nav_home) {
             mNavController.navigate(R.id.action_nav_home_to_sellListFragment)
         }
     }
@@ -174,26 +171,27 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         val temp = 1/0*/
         //testt
 
-        FirebaseAuth.getInstance().signInWithEmailAndPassword("test@gmail.com","123456").addOnCompleteListener {
-            if(it.isSuccessful){
-                var storageRef = FirebaseStorage.getInstance().reference
-                val pathReference = storageRef.child("cert/champion.cer")
-                val rootPath = File(requireContext().filesDir,"cer")
-                if (!rootPath.exists()) {
-                    rootPath.mkdirs()
+        FirebaseAuth.getInstance().signInWithEmailAndPassword("test@gmail.com", "123456")
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    var storageRef = FirebaseStorage.getInstance().reference
+                    val pathReference = storageRef.child("cert/champion.cer")
+                    val rootPath = File(requireContext().filesDir, "cer")
+                    if (!rootPath.exists()) {
+                        rootPath.mkdirs()
+                    }
+                    val localFile = File(rootPath, "champion.cer")
+                    pathReference.getFile(localFile).addOnSuccessListener {
+                        Timber.tag("testt").d("file download successed")
+                        readCert()
+                    }.addOnFailureListener { ex ->
+                        Timber.tag("testt").d("Download error: ${ex.message}")
+                    }
+                } else {
+                    Toast.makeText(requireActivity(), "login fail", Toast.LENGTH_SHORT).show()
+                    Log.d("testt", it.result.toString())
                 }
-                val localFile = File(rootPath, "champion.cer")
-                pathReference.getFile(localFile).addOnSuccessListener {
-                    Timber.tag("testt").d("file download successed")
-                    readCert()
-                }.addOnFailureListener{ ex ->
-                    Timber.tag("testt").d("Download error: ${ex.message}")
-                }
-            }else{
-                Toast.makeText(requireActivity(), "login fail", Toast.LENGTH_SHORT).show()
-                Log.d("testt",it.result.toString())
             }
-        }
     }
 
     override fun onClickSendLogButton() {
@@ -245,14 +243,19 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
     }
 
     override fun onClickLogin() {
-        viewModel.loginCognito("tri.nguyen833","Abcd1234!")
+        viewModel.loginCognito("tri.nguyen833", "Abcd1234!")
     }
 
     override fun onClickLogout() {
         viewModel.logoutCognito()
     }
 
-    private fun readCert(){
+    override fun onClickDemoBiometric() {
+        mNavController.navigate(R.id.action_nav_home_to_loginFragment)
+    }
+
+
+    private fun readCert() {
         val CERT_FILE_NAME = "champion_221026.cer" // 3.vib.com.vn.cer
         val CERT_ALIAS = "ca"
         val X_509 = "X.509"
@@ -265,7 +268,7 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         val cert: Certificate
 
         val fileCert: InputStream = BufferedInputStream(
-            File(requireContext().filesDir,"cer/champion.cer").inputStream()
+            File(requireContext().filesDir, "cer/champion.cer").inputStream()
         )
         try {
             cert = cf.generateCertificate(fileCert)

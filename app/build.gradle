@@ -156,6 +156,8 @@ dependencies {
     implementation 'com.amplifyframework:aws-auth-cognito:2.14.5'
 
     implementation 'com.amplifyframework:aws-auth-cognito:2.14.6'
+
+    implementation 'androidx.biometric:biometric:1.1.0'
 }
 
 // Allow references to generated code

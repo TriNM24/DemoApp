@@ -6,20 +6,25 @@ import android.com.demo.data.api.Status
 import android.com.demo.databinding.FragmentListBinding
 import android.com.demo.ui.base.BaseFragment
 import android.com.demo.utils.DialogUtils
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.MenuProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class BuyListFragment : BaseFragment<FragmentListBinding, BuyListViewModel>() {
+class BuyListFragment : BaseFragment<FragmentListBinding, BuyListViewModel>(), MenuProvider {
     override val resourceLayoutId: Int
         get() = R.layout.fragment_list
 
     private lateinit var adapter: BuyListAdapter
 
     override fun onInitView(root: View?) {
+        requireActivity().addMenuProvider(this, viewLifecycleOwner)
         setupAdapter()
     }
 
@@ -55,6 +60,20 @@ class BuyListFragment : BaseFragment<FragmentListBinding, BuyListViewModel>() {
             }
         }
     }
+
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.menu_buy, menu)
+    }
+
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        when (menuItem.itemId) {
+            R.id.action_buy -> {
+                Toast.makeText(requireContext(), "Buy", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return true
+    }
+
     override fun onResume() {
         super.onResume()
         viewModel.getData()

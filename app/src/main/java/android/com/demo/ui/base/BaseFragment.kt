@@ -41,11 +41,16 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
         onInitView(root)
         // Obtain the FirebaseAnalytics instance.
         firebaseAnalytics = Firebase.analytics
+        showHideActionBar(mIsShowActionBar)
         return root
     }
 
     fun updateTitle(title: String) {
         (activity as BaseActivity<*>)?.updateTitle(title)
+    }
+
+    private fun showHideActionBar(isShow: Boolean) {
+        (activity as BaseActivity<*>).showHideActionBar(isShow)
     }
 
     @CallSuper
@@ -54,6 +59,9 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
         mLoadingDialog = DialogUtils.getLoading(requireContext())
         subscribeUi(viewModel)
     }
+
+    open val mIsShowActionBar: Boolean
+        get() = true
 
     open val owner: ViewModelStoreOwner
         get() = this

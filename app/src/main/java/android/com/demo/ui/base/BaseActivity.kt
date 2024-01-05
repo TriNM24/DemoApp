@@ -49,6 +49,16 @@ abstract class BaseActivity<BD : ViewDataBinding>: AppCompatActivity() {
         }
     }
 
+    fun showHideActionBar(isShow: Boolean) {
+        Handler(mainLooper).post {
+            if (isShow) {
+                supportActionBar?.show()
+            } else {
+                supportActionBar?.hide()
+            }
+        }
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         binding = null

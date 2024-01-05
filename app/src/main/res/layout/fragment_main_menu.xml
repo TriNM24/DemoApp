@@ -95,8 +95,19 @@
             android:layout_marginTop="@dimen/margin_10dp"
             android:onClick="@{() -> actions.onClickLogout()}"
             android:text="@string/menu_logout"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/btnLoginBiometric"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
+        <Button
+            android:id="@+id/btnLoginBiometric"
+            style="@style/CommonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:onClick="@{() -> actions.onClickDemoBiometric()}"
+            android:text="@string/menu_biometric"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

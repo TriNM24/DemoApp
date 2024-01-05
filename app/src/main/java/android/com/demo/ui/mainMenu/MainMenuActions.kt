@@ -9,4 +9,5 @@ interface MainMenuActions {
 
     fun onClickLogin()
     fun onClickLogout()
+    fun onClickDemoBiometric()
 }

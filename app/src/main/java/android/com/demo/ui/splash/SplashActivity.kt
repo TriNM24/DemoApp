@@ -28,6 +28,7 @@ class SplashActivity : AppCompatActivity() {
         viewModel.resultChecking.observe(this) {
             val intent = Intent(this, MainActivity::class.java)
             this.startActivity(intent)
+            finish()
         }
         viewModel.processChecking()
     }
