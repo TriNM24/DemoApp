@@ -169,7 +169,6 @@ class MainMenuFragment : BaseFragment<FragmentMainMenuBinding, MainMenuViewModel
         paramBuilder.param("user_custom_view_id", "onClickCrashButtonID")
         firebaseAnalytics.logEvent(USER_CUSTOM_VIEW, paramBuilder.bundle)
         val temp = 1/0*/
-        //testt
 
         FirebaseAuth.getInstance().signInWithEmailAndPassword("test@gmail.com", "123456")
             .addOnCompleteListener {
