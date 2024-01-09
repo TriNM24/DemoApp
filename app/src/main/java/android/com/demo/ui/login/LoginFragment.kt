@@ -3,14 +3,13 @@ package android.com.demo.ui.login
 import android.com.demo.R
 import android.com.demo.databinding.FragmentLoginBinding
 import android.com.demo.ui.base.BaseFragment
-import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
-import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
@@ -60,11 +59,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
                     result: BiometricPrompt.AuthenticationResult
                 ) {
                     super.onAuthenticationSucceeded(result)
-                    Toast.makeText(
-                        requireContext(),
-                        "Authentication succeeded!", Toast.LENGTH_SHORT
-                    )
-                        .show()
+                    viewModel.getSavedPass()
                 }
 
                 override fun onAuthenticationFailed() {
@@ -85,14 +80,32 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(),
             .build()
     }
 
+
     override fun subscribeUi(viewModel: LoginViewModel) {
+
+        Handler(Looper.getMainLooper()).postDelayed({viewModel.mInputPass.value = "default"}, 500)
+
         binding?.apply {
             setViewModel(viewModel)
+            lifecycleOwner = this@LoginFragment
             actions = this@LoginFragment
+        }
+        viewModel.mDecryptedData.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "Decrypted data: $it", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.mEncryptData.observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+        }
+        viewModel.mInputPass.observe(viewLifecycleOwner){
+            Log.d("testt","inputed data:$it")
         }
     }
 
     override fun onClickLoginButton() {
+        viewModel.mInputPass.value?.let { viewModel.savePass(it) }
+    }
+
+    override fun onClickGetSavedPass() {
         biometricPrompt.authenticate(promptInfo)
     }
 

@@ -21,9 +21,11 @@
     <string name="title_quantity">Quantity: %s</string>
 
     <string name="message_do_not_have_data">Do not have data</string>
-    <string name="login_button">Login</string>
+    <string name="login_button">Login and save pass</string>
+    <string name="get_saved_pass_button">Get saved pass</string>
     <string name="register_biometric">Register Login Biometric</string>
     <string name="secret_key_name">biometric_sample_encryption_key</string>
+    <string name="secret_key_name_case1">biometric_sample_encryption_key_1</string>
 
     <string name="prompt_info_title">Sample App Authentication</string>
     <string name="prompt_info_subtitle">Please login to get access</string>

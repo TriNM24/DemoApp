@@ -1,9 +1,12 @@
 package android.com.demo.ui.base
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.com.demo.utils.DialogUtils
+import android.com.demo.utils.hideKeyboard
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
@@ -53,10 +56,19 @@ abstract class BaseFragment<BD : ViewDataBinding, VM : ViewModel> : Fragment() {
         (activity as BaseActivity<*>).showHideActionBar(isShow)
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mLoadingDialog = DialogUtils.getLoading(requireContext())
+        binding?.root?.setOnTouchListener { v, event ->
+            when (event?.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    hideKeyboard()
+                }
+            }
+            v?.onTouchEvent(event) ?: true
+        }
         subscribeUi(viewModel)
     }
 

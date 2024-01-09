@@ -3,9 +3,10 @@
 
     <style name="Theme.BaseApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/default_background</item>
-        <item name="colorPrimaryVariant">@color/default_background</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_0066B3</item>
+        <item name="colorAccent">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
         <!--<item name="android:navigationBarColor">@android:color/transparent</item>-->
@@ -13,5 +14,9 @@
         <!-- Customize your theme here. -->
         <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+        <!--change color for TextInputLayout-->
+        <item name="colorControlNormal">@android:color/holo_blue_light</item>
+        <item name="colorControlActivated">@android:color/holo_red_dark</item>
+        <item name="colorControlHighlight">@android:color/holo_orange_dark</item>
     </style>
 </resources>

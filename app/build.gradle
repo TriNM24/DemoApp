@@ -34,14 +34,8 @@ android {
 
         /*rename bundle file(*.aab)*/
         setProperty("archivesBaseName", "baseApp_" + new Date().format('ddMMyyyy_hhmm_') + versionName)
-
-        javaCompileOptions {
-            annotationProcessorOptions {
-                arguments += [
-                        "room.schemaLocation"  : "$projectDir/schemas".toString(),
-                        "room.incremental"     : "true",
-                        "room.expandProjection": "true"]
-            }
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
         }
     }
 
@@ -91,6 +85,7 @@ android {
     }
     buildFeatures {
         dataBinding true
+        buildConfig true
     }
 
 }
@@ -100,12 +95,12 @@ dependencies {
 
     implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.7.5'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
     implementation 'com.google.firebase:firebase-crashlytics-ktx:18.6.0'
     implementation 'com.google.firebase:firebase-analytics-ktx:21.5.0'
     implementation 'com.google.firebase:firebase-storage:20.3.0'
@@ -119,7 +114,7 @@ dependencies {
     androidTestImplementation 'androidx.test:rules:1.5.0'
     androidTestImplementation 'androidx.test.espresso:espresso-intents:3.5.1'
 
-    implementation("com.google.dagger:hilt-android:2.48.1")
+    implementation("com.google.dagger:hilt-android:2.49")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     //Log
@@ -153,7 +148,7 @@ dependencies {
     releaseImplementation 'com.github.chuckerteam.chucker:library-no-op:4.0.0'
 
     implementation 'com.amplifyframework:aws-analytics-pinpoint:2.14.5'
-    implementation 'com.amplifyframework:aws-auth-cognito:2.14.5'
+    implementation 'com.amplifyframework:aws-auth-cognito:2.14.6'
 
     implementation 'com.amplifyframework:aws-auth-cognito:2.14.6'
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -16,6 +17,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edtInputPass"
+            style="@style/CommonOutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="40dp"
+            app:boxCornerRadiusBottomEnd="@dimen/margin_10dp"
+            app:boxCornerRadiusBottomStart="@dimen/margin_10dp"
+            app:boxCornerRadiusTopEnd="@dimen/margin_10dp"
+            app:boxCornerRadiusTopStart="@dimen/margin_10dp"
+            android:hint="label text"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="@={viewModel.mInputPass}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Button
             android:id="@+id/btnLogin"
             style="@style/CommonButton"
@@ -26,7 +46,19 @@
             android:text="@string/login_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/edtInputPass" />
+
+        <Button
+            android:id="@+id/btnGetSavedPass"
+            style="@style/CommonButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="@{() -> actions.onClickGetSavedPass()}"
+            android:text="@string/get_saved_pass_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
         <Button
             android:id="@+id/btnRegisterBiometric"
@@ -38,7 +70,7 @@
             android:text="@string/register_biometric"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+            app:layout_constraintTop_toBottomOf="@+id/btnGetSavedPass" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -2,14 +2,21 @@
     <!-- Base application theme. -->
     <style name="Theme.BaseApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/default_background</item>
-        <item name="colorPrimaryVariant">@color/default_background</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_0066B3</item>
+        <item name="colorAccent">@color/color_primary</item>
+        <item name="colorOnPrimary">@color/color_on_primary</item>
+
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/stroke_color</item>
         <!-- Customize your theme here. -->
         <item name="android:windowAnimationStyle">@style/WindowAnimationStyle</item>
         <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+
+        <!--change color for TextInputLayout-->
+        <item name="colorControlNormal">@android:color/holo_blue_light</item>
+        <item name="colorControlActivated">@android:color/holo_red_dark</item>
+        <item name="colorControlHighlight">@android:color/holo_orange_dark</item>
     </style>
 
     <style name="ToolBarStyle" parent="Theme.AppCompat">
@@ -68,13 +75,20 @@
         <item name="rippleColor">@color/stroke_color</item>
         <item name="android:textColor">@color/white</item>
 
-        <item name="fontFamily">@macro/m3_ref_typeface_plain_medium</item>
-        <item name="android:fontFamily">@macro/m3_ref_typeface_plain_medium</item>
+        <item name="android:fontFamily">@font/inter_medium</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textSize">14sp</item>
         <item name="android:letterSpacing">0.00714286</item>
         <item name="android:textAllCaps">false</item>
     </style>
+
+    <style name="CommonOutlinedBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/text_input_layout_stroke_color</item>
+        <item name="android:textColorHint">@color/text_input_hint_selector</item>
+        <item name="hintTextColor">@android:color/holo_red_dark</item>
+    </style>
+
+
 
     <style name="TextMedium_14sp" parent="TextAppearance.Material3.BodyMedium">
     </style>
