@@ -16,9 +16,11 @@
 
 package android.com.demo.ui.login
 
+import android.com.demo.BuildConfig
 import android.content.Context
 import android.os.Build
 import android.security.keystore.KeyGenParameterSpec
+import android.security.keystore.KeyInfo
 import android.security.keystore.KeyProperties
 import android.util.Log
 import androidx.annotation.RequiresApi
@@ -151,12 +153,11 @@ private class CryptographyManagerImpl : CryptographyManager {
                 .setKeySize(2048)
                 .setUserAuthenticationRequired(true)
 
-            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.R){
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
                 spec.setUserAuthenticationValidityDurationSeconds(10)
-            }else{
-                 spec.setUserAuthenticationParameters(10, KeyProperties.AUTH_BIOMETRIC_STRONG)
+            } else {
+                spec.setUserAuthenticationParameters(10, KeyProperties.AUTH_BIOMETRIC_STRONG)
             }
-
 
             keyPairGenerator.initialize(spec.build())
             return keyPairGenerator.generateKeyPair()
@@ -164,6 +165,14 @@ private class CryptographyManagerImpl : CryptographyManager {
             // Load the existing RSA key pair
             val privateKey = keyStore.getKey(keyName, null) as PrivateKey
             val publicKey = keyStore.getCertificate(keyName).publicKey
+
+            val keyFactory = KeyFactory.getInstance(privateKey.algorithm, "AndroidKeyStore")
+            val keyInfo = keyFactory.getKeySpec(privateKey, KeyInfo::class.java)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                Log.d("testt", "securityLevel: ${keyInfo.securityLevel}")
+            } else {
+                Log.d("testt", "detect isInsideSecureHardware: ${keyInfo.isInsideSecureHardware}")
+            }
             return KeyPair(publicKey, privateKey)
         }
 
@@ -203,7 +212,8 @@ private class CryptographyManagerImpl : CryptographyManager {
         val publicKeyOld = getOrCreateSecretKey(keyName).public
 
         //test convert public key to string
-        val publicKeyString = android.util.Base64.encodeToString(publicKeyOld.encoded, android.util.Base64.DEFAULT)
+        val publicKeyString =
+            android.util.Base64.encodeToString(publicKeyOld.encoded, android.util.Base64.DEFAULT)
 
         //convert publicKeyString to public key
         val publicKeyByte = android.util.Base64.decode(publicKeyString, android.util.Base64.DEFAULT)

@@ -26,8 +26,8 @@ import androidx.fragment.app.Fragment
 import timber.log.Timber
 
 // Since we are using the same methods in more than one Activity, better give them their own file.
-object BiometricPromptUtils {
-    private const val TAG = "BiometricPromptUtils"
+class BiometricPromptUtils {
+    private val TAG = "BiometricPromptUtils"
     fun createBiometricPrompt(
         fragment: Fragment,
         processSuccess: (BiometricPrompt.AuthenticationResult) -> Unit
